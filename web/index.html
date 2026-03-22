@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahil S.</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav id="nav">
+      <span class="nav-logo">Sahil Singla</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a
+          href="https://rad-innovations.tech/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-rad"
+          >RAD Innovations</a
+        >
+        <a
+          href="https://substack.com/@ss2029"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-substack"
+          >Substack</a
+        >
+      </div>
+    </nav>
+
+    <main>
+      <section id="hero">
+        <div class="hero-content">
+          <div class="s-tag">About</div>
+          <div class="headline">
+            <span class="lm"
+              ><span class="li" id="l0"
+                >Hey, I'm Sahil — a high school</span
+              ></span
+            >
+            <span class="lm"
+              ><span class="li" id="l1"
+                ><span class="abox" id="box1">student crafting</span>
+                thoughtful</span
+              ></span
+            >
+            <span class="lm"
+              ><span class="li" id="l2"
+                >solutions at the intersection</span
+              ></span
+            >
+            <span class="lm"
+              ><span class="li" id="l3"
+                ><span class="abox" id="box2">of design & engineering</span>
+                —</span
+              ></span
+            >
+            <span class="lm"
+              ><span class="li" id="l4">let's build something real.</span></span
+            >
+          </div>
+
+          <div class="callout" id="c1">
+            <span class="ct">my curiosity</span>
+            <span class="cl"></span>
+            <span class="car"></span>
+          </div>
+          <div class="callout" id="c2">
+            <span class="cal"></span>
+            <span class="cl"></span>
+            <span class="ct">my craft</span>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#work" class="hero-btn hero-btn--primary">View my work</a>
+            <a href="#contact" class="hero-btn hero-btn--ghost">Get in touch</a>
+          </div>
+        </div>
+
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-rule" id="hrule"></div>
+      </section>
+
+      <section id="work">
+        <div class="work-header">
+          <div class="s-tag">My Work</div>
+          <span class="work-count">Selected projects</span>
+        </div>
+
+        <div class="work-grid">
+          <!-- Volunteer.org -->
+          <div class="work-card" data-index="01">
+            <div
+              class="work-card-bg"
+              style="
+                background:
+                  radial-gradient(
+                    ellipse at 75% 20%,
+                    rgba(255, 138, 0, 0.12) 0%,
+                    transparent 50%
+                  ),
+                  radial-gradient(
+                    ellipse at 20% 80%,
+                    rgba(255, 255, 255, 0.05) 0%,
+                    transparent 55%
+                  ),
+                  linear-gradient(135deg, #1a1412 0%, #0a0a0a 100%);
+              "
+            ></div>
+            <div class="work-card-content">
+              <div class="work-card-top">
+                <span class="work-card-num">01</span>
+                <div class="work-card-tags">
+                  <span class="work-tag">Flask</span>
+                  <span class="work-tag">SQLite</span>
+                  <span class="work-tag">TensorFlow</span>
+                </div>
+              </div>
+              <div class="work-card-bottom">
+                <h3 class="work-card-title">Volunteer.org</h3>
+                <p class="work-card-desc">
+                  Volunteer opportunity platform built for Congressman
+                  DeSaulnier's 2025 App Challenge. AI-powered rating and
+                  sorting, staff review portal, safety guarantee.
+                </p>
+                <div class="work-card-accent" style="background: #ff4d00"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MedScan -->
+          <div class="work-card" data-index="02">
+            <div
+              class="work-card-bg"
+              style="
+                background:
+                  radial-gradient(
+                    ellipse at 70% 30%,
+                    rgba(220, 38, 38, 0.2) 0%,
+                    transparent 55%
+                  ),
+                  radial-gradient(
+                    ellipse at 30% 70%,
+                    rgba(30, 30, 30, 0.8) 0%,
+                    transparent 60%
+                  ),
+                  #080808;
+              "
+            ></div>
+            <div class="work-card-content">
+              <div class="work-card-top">
+                <span class="work-card-num">02</span>
+                <div class="work-card-tags">
+                  <span class="work-tag">Mobile</span>
+                  <span class="work-tag">Custom AI</span>
+                  <span class="work-tag">CV</span>
+                </div>
+              </div>
+              <div class="work-card-bottom">
+                <h3 class="work-card-title">MedScan</h3>
+                <p class="work-card-desc">
+                  Self-diagnosis app with real-time camera scanning. Custom AI
+                  engine trained on thousands of medical images — tells you what
+                  it is, how urgent, and what to do next.
+                </p>
+                <div class="work-card-accent" style="background: #dc2626"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- V2V -->
+          <div class="work-card" data-index="03">
+            <div
+              class="work-card-bg"
+              style="
+                background:
+                  radial-gradient(
+                    ellipse at 60% 25%,
+                    rgba(109, 40, 217, 0.22) 0%,
+                    transparent 55%
+                  ),
+                  radial-gradient(
+                    ellipse at 25% 75%,
+                    rgba(30, 58, 138, 0.25) 0%,
+                    transparent 55%
+                  ),
+                  #090c14;
+              "
+            ></div>
+            <div class="work-card-content">
+              <div class="work-card-top">
+                <span class="work-card-num">03</span>
+                <div class="work-card-tags">
+                  <span class="work-tag">Hardware</span>
+                  <span class="work-tag">MPU6050</span>
+                  <span class="work-tag">IoT</span>
+                </div>
+              </div>
+              <div class="work-card-bottom">
+                <h3 class="work-card-title">V2V</h3>
+                <p class="work-card-desc">
+                  Low-cost external crash-detection module detecting high-impact
+                  collisions and transmitting alerts to emergency services with
+                  accurate GPS location data.
+                </p>
+                <div class="work-card-accent" style="background: #6d28d9"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View more -->
+          <a class="work-card work-card--more" href="/projects">
+            <div class="work-card-bg" style="background: #0c0f14"></div>
+            <div class="work-card-content work-card-content--more">
+              <span class="work-more-label">View all projects</span>
+              <div class="work-more-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="about-grid">
+          <div class="about-left">
+            <div class="s-tag">About</div>
+            <p class="about-bio">
+              I'm Sahil Singla, a high school student from Dublin, California
+              building at the intersection of software, hardware, and aerospace.
+              I write code, construct aircraft, lead workshops, and ship real
+              products — currently serving as Educational &amp; Marketing Lead
+              at RAD Innovations and competing with FTC Robotics Team 25781.
+            </p>
+            <p class="about-bio about-bio--muted">
+              I care about building things that work in the real world — not
+              just on a screen. Whether that's a crash-detection module, a
+              volunteer platform that earned a Congressional recognition, or an
+              aircraft built rivet by rivet.
+            </p>
+            <div class="about-stack">
+              <div class="about-stack-label">Stack</div>
+              <div class="about-stack-pills">
+                <span class="stack-pill">Python</span>
+                <span class="stack-pill">Go</span>
+                <span class="stack-pill">TypeScript</span>
+                <span class="stack-pill">Java</span>
+                <span class="stack-pill">Flask</span>
+                <span class="stack-pill">OpenCV</span>
+                <span class="stack-pill">TensorFlow</span>
+                <span class="stack-pill">SQLite</span>
+                <span class="stack-pill">MongoDB</span>
+                <span class="stack-pill">Raspberry Pi</span>
+                <span class="stack-pill">CAD / SolidWorks</span>
+                <span class="stack-pill">WordPress</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-right">
+            <div class="about-card">
+              <div class="about-card-header">
+                <div>
+                  <div class="about-card-title">Civil Air Patrol</div>
+                  <div class="about-card-meta">
+                    Squadron 156 · April 2023 — Present
+                  </div>
+                </div>
+                <div class="about-card-badge">Active</div>
+              </div>
+              <ul class="about-card-list">
+                <li>
+                  Cadet Technical Sergeant · Advanced Training Flight Sergeant
+                </li>
+                <li>
+                  Competed in HABC &amp; American Rocketry Challenge (ARC)
+                </li>
+                <li>CyberPatriot Cisco Packet Tracer lead</li>
+                <li>Assistant Cadet Advisory Council member</li>
+              </ul>
+            </div>
+
+            <div class="about-card">
+              <div class="about-card-header">
+                <div>
+                  <div class="about-card-title">RAD Innovations</div>
+                  <div class="about-card-meta">
+                    Educational &amp; Marketing Lead · Nov 2025 — Present
+                  </div>
+                </div>
+                <div class="about-card-badge about-card-badge--red">
+                  Current
+                </div>
+              </div>
+              <ul class="about-card-list">
+                <li>
+                  Leads the aeromodelling division and hosts 2 successful
+                  workshops
+                </li>
+                <li>Designed and built the full org website from scratch</li>
+                <li>
+                  Working on JASPER — a personal aerospace project within RAD
+                </li>
+                <li>
+                  Contributing to the Space Launch Project alongside the team
+                </li>
+              </ul>
+              <a
+                href="https://rad-innovations.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="about-card-visit"
+              >
+                Visit rad-innovations.tech
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                  />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="about-card">
+              <div class="about-card-header">
+                <div>
+                  <div class="about-card-title">Om Innovations</div>
+                  <div class="about-card-meta">
+                    Website Designer · Aug – Nov 2025
+                  </div>
+                </div>
+                <div class="about-card-badge about-card-badge--muted">
+                  Completed
+                </div>
+              </div>
+              <ul class="about-card-list">
+                <li>Designed and built om-innovations.com on Hostinger</li>
+                <li>Built with WordPress, SeedProd, and Gutenberg</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-container">
+          <div class="s-tag">Contact</div>
+          <p class="contact-desc">
+            Get in touch for collaborations, projects, or just to say hello.
+          </p>
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea name="message" id="message" required></textarea>
+            </div>
+            <button type="submit" class="contact-btn" id="contact-submit">
+              Send Message
+            </button>
+            <p class="form-status" id="form-status"></p>
+          </form>
+        </div>
+      </section>
+
+      <footer id="footer">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="footer-name">Sahil Singla</span>
+            <div class="footer-status">
+              <div class="status-dot"></div>
+              <span>Available for work</span>
+            </div>
+          </div>
+          <div class="footer-center">
+            <span class="footer-copy"
+              >© 2026 Sahil Singla. All rights reserved.</span
+            >
+          </div>
+          <div class="footer-right">
+            <a
+              href="https://www.linkedin.com/in/sahil-singla-6b590b379/"
+              target="_blank"
+              rel="noopener"
+              class="footer-link"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/li231sd"
+              target="_blank"
+              rel="noopener"
+              class="footer-link"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
