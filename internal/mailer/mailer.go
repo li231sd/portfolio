@@ -11,13 +11,14 @@ import (
 type resendPayload struct {
 	From    string   `json:"from"`
 	To      []string `json:"to"`
+	ReplyTo []string `json:"reply_to"`
 	Subject string   `json:"subject"`
 	Text    string   `json:"text"`
 }
 
 func Send(name, fromEmail, message string) error {
 	apiKey := os.Getenv("RESEND_API_KEY")
-	to     := os.Getenv("CONTACT_TO")
+	to := os.Getenv("CONTACT_TO")
 
 	// Dev mode — no env vars set, just print
 	if apiKey == "" || to == "" {
@@ -28,11 +29,10 @@ func Send(name, fromEmail, message string) error {
 
 	payload := resendPayload{
 		From:    "Portfolio Contact <onboarding@resend.dev>",
-		To:      []string{to},
+		To:      []string{to},        // your own email (must match Resend account)
+		ReplyTo: []string{fromEmail}, // visitor's email goes here
 		Subject: fmt.Sprintf("Portfolio contact from %s", name),
-		Text: fmt.Sprintf(
-			"Name: %s\nEmail: %s\n\n%s", name, fromEmail, message,
-		),
+		Text:    fmt.Sprintf("Name: %s\nEmail: %s\n\n%s", name, fromEmail, message),
 	}
 
 	body, err := json.Marshal(payload)
