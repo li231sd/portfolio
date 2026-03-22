@@ -1,60 +1,26 @@
 package mailer
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"net/http"
+	"net/smtp"
 	"os"
 )
 
-type resendPayload struct {
-	From    string   `json:"from"`
-	To      []string `json:"to"`
-	ReplyTo []string `json:"reply_to"`
-	Subject string   `json:"subject"`
-	Text    string   `json:"text"`
-}
-
 func Send(name, fromEmail, message string) error {
-	apiKey := os.Getenv("RESEND_API_KEY")
-	to := os.Getenv("CONTACT_TO")
+	gmailUser := os.Getenv("GMAIL_USER")     // your.email@gmail.com
+	gmailPass := os.Getenv("GMAIL_APP_PASS") // the app password
+	to        := os.Getenv("CONTACT_TO")     // same gmail or any email
 
-	// Dev mode — no env vars set, just print
-	if apiKey == "" || to == "" {
-		fmt.Printf("\n--- Contact Form ---\nFrom: %s <%s>\n%s\n---\n",
-			name, fromEmail, message)
+	if gmailUser == "" || gmailPass == "" {
+		fmt.Printf("\n--- Contact Form ---\nFrom: %s <%s>\n%s\n---\n", name, fromEmail, message)
 		return nil
 	}
 
-	payload := resendPayload{
-		From:    "Portfolio Contact <onboarding@resend.dev>",
-		To:      []string{to},        // your own email (must match Resend account)
-		ReplyTo: []string{fromEmail}, // visitor's email goes here
-		Subject: fmt.Sprintf("Portfolio contact from %s", name),
-		Text:    fmt.Sprintf("Name: %s\nEmail: %s\n\n%s", name, fromEmail, message),
-	}
+	subject := fmt.Sprintf("Portfolio contact from %s", name)
+	body := fmt.Sprintf("Name: %s\nEmail: %s\n\n%s", name, fromEmail, message)
+	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nReply-To: %s\r\nSubject: %s\r\n\r\n%s",
+		gmailUser, to, fromEmail, subject, body)
 
-	body, err := json.Marshal(payload)
-	if err != nil {
-		return err
-	}
-
-	req, err := http.NewRequest("POST", "https://api.resend.com/emails", bytes.NewReader(body))
-	if err != nil {
-		return err
-	}
-	req.Header.Set("Authorization", "Bearer "+apiKey)
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode >= 400 {
-		return fmt.Errorf("resend error: status %d", resp.StatusCode)
-	}
-	return nil
+	auth := smtp.PlainAuth("", gmailUser, gmailPass, "smtp.gmail.com")
+	return smtp.SendMail("smtp.gmail.com:587", auth, gmailUser, []string{to}, []byte(msg))
 }
