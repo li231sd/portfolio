@@ -1,60 +1,58 @@
 package mailer
 
 import (
-	"crypto/tls"
+	"bytes"
+	"encoding/json"
 	"fmt"
-	"net/smtp"
+	"io"
+	"net/http"
 	"os"
 )
 
 func Send(name, fromEmail, message string) error {
-	gmailUser := os.Getenv("GMAIL_USER")
-	gmailPass := os.Getenv("GMAIL_APP_PASS")
-	to        := os.Getenv("CONTACT_TO")
+	accessKey := os.Getenv("WEB3FORMS_KEY")
+	toEmail := os.Getenv("CONTACT_TO")
 
-	if gmailUser == "" || gmailPass == "" {
-		fmt.Printf("\n--- Contact Form ---\nFrom: %s <%s>\n%s\n---\n", name, fromEmail, message)
-		return nil
+	if accessKey == "" {
+		return fmt.Errorf("WEB3FORMS_KEY is missing")
 	}
 
-	subject := fmt.Sprintf("Portfolio contact from %s", name)
-	body    := fmt.Sprintf("Name: %s\nEmail: %s\n\n%s", name, fromEmail, message)
-	msg     := fmt.Sprintf(
-		"From: %s\r\nTo: %s\r\nReply-To: %s\r\nSubject: %s\r\n\r\n%s",
-		gmailUser, to, fromEmail, subject, body,
-	)
+	// The payload Web3Forms expects
+	payload := map[string]interface{}{
+		"access_key": accessKey,
+		"from_name":  name,
+		"email":      fromEmail,
+		"replyto":    fromEmail,
+		"subject":    "New Portfolio Inquiry",
+		"message":    message,
+		"to":         toEmail,
+		"json_cache": "true", // CRITICAL: Tells Web3Forms to return JSON, not a redirect
+	}
 
-	tlsConfig := &tls.Config{ServerName: "smtp.gmail.com"}
-	conn, err := tls.Dial("tcp", "smtp.gmail.com:465", tlsConfig)
+	jsonData, _ := json.Marshal(payload)
+
+	// Create request with custom headers to avoid 403
+	req, err := http.NewRequest("POST", "https://api.web3forms.com/submit", bytes.NewBuffer(jsonData))
 	if err != nil {
-		return fmt.Errorf("tls dial: %w", err)
+		return err
 	}
 
-	client, err := smtp.NewClient(conn, "smtp.gmail.com")
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("smtp client: %w", err)
+		return err
 	}
-	defer client.Close()
+	defer resp.Body.Close()
 
-	auth := smtp.PlainAuth("", gmailUser, gmailPass, "smtp.gmail.com")
-	if err = client.Auth(auth); err != nil {
-		return fmt.Errorf("smtp auth: %w", err)
-	}
-
-	if err = client.Mail(gmailUser); err != nil {
-		return fmt.Errorf("smtp mail: %w", err)
-	}
-	if err = client.Rcpt(to); err != nil {
-		return fmt.Errorf("smtp rcpt: %w", err)
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		// ADD THIS LINE TEMPORARILY:
+		fmt.Printf("DEBUG WEB3FORMS: %s\n", string(body)) 
+		return fmt.Errorf("web3forms error (%d): %s", resp.StatusCode, string(body))
 	}
 
-	w, err := client.Data()
-	if err != nil {
-		return fmt.Errorf("smtp data: %w", err)
-	}
-	if _, err = w.Write([]byte(msg)); err != nil {
-		return fmt.Errorf("smtp write: %w", err)
-	}
-
-	return w.Close()
+	return nil
 }

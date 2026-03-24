@@ -12,9 +12,9 @@ import (
 )
 
 func main() {
-	godotenv.Load()
+	_ = godotenv.Load() 
 
-	db := store.Init("data.db")
+    db := store.Init("data.db")
 
 	mux := http.NewServeMux()
 
